@@ -4,7 +4,7 @@ import json
 import random
 
 class board:
-
+            
     def sortAndShuffle(cardsList):
         tier1 = []
         tier2 = []
@@ -35,8 +35,42 @@ class board:
         for card in cardsJSON:
             cardsList.append(cards.card.decode(card))
 
+        fp.close()
+            
         return board.sortAndShuffle(cardsList)
     
-    def __init__(self):
-        self.tier1, self.tier2, self.tier3 = board.readCards()
+    def __init__(self, numPlayers):
+
+        if(type(numPlayers) is not int):
+            raise Exception("numPlayers is not an integer!")
+        elif(numPlayers > 4):
+            raise Exception("Cannot have more than 4 players")
+        elif(numPlayers < 2):
+            raise Exception("Cannot have less than 4 players")
+
+        self.numNobles = numPlayers + 1
+
+        numTokens = 7
+
+        if(numPlayers == 2):
+            numTokens = numTokens - 3
+        elif(numPlayers == 3):
+            numTokens = numTokens - 2
+
+        self.numJokers = 5
+        self.numGreen = numTokens
+        self.numWhite = numTokens
+        self.numBrown = numTokens
+        self.numRed = numTokens
+        self.numBlue = numTokens
         
+        self.tier1, self.tier2, self.tier3 = board.readCards()
+
+        self.tier1Active = []
+        self.tier2Active = []
+        self.tier3Active = []
+        
+        for i in range(0,4):
+            self.tier1Active.append(self.tier1.pop(0))
+            self.tier2Active.append(self.tier2.pop(0))
+            self.tier3Active.append(self.tier3.pop(0))
