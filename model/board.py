@@ -1,10 +1,12 @@
 import sys
-import cards
+from model import cards
 import json
 import random
+import os
 
 class board:
-            
+
+    @staticmethod
     def sortAndShuffle(cardsList):
         tier1 = []
         tier2 = []
@@ -27,7 +29,13 @@ class board:
 
         return (tier1, tier2, tier3)
 
-    def readCards():
+    @staticmethod
+    def readCards(*altPath):
+        resourcePath = "resources/cards.json"
+
+        if(len(altPath) != 0):
+            resourcePath = altPath[0]
+        
         fp = open("resources/cards.json", "r")
         cardsJSON = json.load(fp)
         cardsList = []
@@ -39,8 +47,7 @@ class board:
             
         return board.sortAndShuffle(cardsList)
     
-    def __init__(self, numPlayers):
-
+    def __init__(self, numPlayers, *altResourcePath):
         if(type(numPlayers) is not int):
             raise Exception("numPlayers is not an integer!")
         elif(numPlayers > 4):
@@ -64,7 +71,7 @@ class board:
         self.numRed = numTokens
         self.numBlue = numTokens
         
-        self.tier1, self.tier2, self.tier3 = board.readCards()
+        self.tier1, self.tier2, self.tier3 = board.readCards() if len(altResourcePath) == 0 else board.readCards(altResourcePath[0])
 
         self.tier1Active = []
         self.tier2Active = []

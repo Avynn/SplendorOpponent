@@ -9,6 +9,7 @@ class cost:
         self.brown = brown
         self.white = white
 
+    @staticmethod
     def decode(dictionaryObject):
         return cost(dictionaryObject["red"], dictionaryObject["green"], dictionaryObject["blue"], dictionaryObject["brown"], dictionaryObject["white"])
 
@@ -19,12 +20,14 @@ class card:
         self.bonus = bonus
         self.cost = cost
 
+    @staticmethod
     def encode(self):
         dictionary = self.__dict__
         dictionary['cost'] = self.cost.__dict__
         
         return dictionary
 
+    @staticmethod
     def decode(dictionaryObject):
         return card(dictionaryObject["tier"], dictionaryObject["prestige"], dictionaryObject["bonus"], cost.decode(dictionaryObject["cost"]))
 
@@ -34,11 +37,13 @@ class tile:
         self.prestige = prestige
         self.cost = cost
 
+    @staticmethod
     def encode(self):
         dictionary = self.__dict__
         dictionary['cost'] = self.cost.__dict__
 
         return dictionary
 
+    @staticmethod
     def decode(dictionaryObject):
         return tile(dictionaryObject["prestige"], cost.decode(dictionaryObject["cost"]))

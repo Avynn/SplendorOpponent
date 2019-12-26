@@ -1,11 +1,7 @@
 import unittest
 import sys
 import os
-
-os.chdir("../")
-sys.path.insert(1, "model")
-
-import gameManager
+from model import gameManager
 
 class managerTests(unittest.TestCase):
 

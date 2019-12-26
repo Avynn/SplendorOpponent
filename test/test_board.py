@@ -1,17 +1,18 @@
 import unittest
-import sys
-import os
-
-os.chdir("../")
-sys.path.insert(1, "model")
-
-import board
+from model import board
 
 class boardTests(unittest.TestCase):
 
-    def test_initFullGame(self):
-        b = board.board(4)
+    ### WARNING ####
+    # These tests only work if run in all tests, this is because
+    # python's unittest module obscures the relative path to resources
+    # resulting in a no such path error.  The only way I've found to fix
+    # this is by coercing the path from the constructor call in the
+    # tests themselves.
 
+    def test_initFullGame(self):
+        b = board.board(4, "SplendorOpponent/resources/cards.json") #Unittests seem to be run from the parent of the cwd
+        
         self.assertEqual(b.numGreen, 7)
         self.assertEqual(b.numBlue, 7)
         self.assertEqual(b.numWhite, 7)
@@ -20,7 +21,7 @@ class boardTests(unittest.TestCase):
         self.assertEqual(b.numNobles, 5)
 
     def test_init3PlayerGame(self):
-        b = board.board(3)
+        b = board.board(3, "SplendorOpponent/resources/cards.json")
 
         self.assertEqual(b.numGreen, 5)
         self.assertEqual(b.numBlue, 5)
@@ -30,7 +31,7 @@ class boardTests(unittest.TestCase):
         self.assertEqual(b.numNobles, 4)
 
     def test_initDuel(self):
-        b = board.board(2)
+        b = board.board(2, "SplendorOpponent/resources/cards.json")
 
         self.assertEqual(b.numGreen, 4)
         self.assertEqual(b.numBlue, 4)

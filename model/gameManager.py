@@ -1,6 +1,4 @@
-import board
-import cards
-import player
+from model import board, player
 
 class manager:
 

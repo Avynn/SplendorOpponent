@@ -1,5 +1,4 @@
-import board
-import cards
+from model import board, cards
 
 class player:
 
