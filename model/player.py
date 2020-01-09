@@ -6,18 +6,22 @@ class player:
 
         self.name = name
 
-        #wallet
-        self.numRed = 0
-        self.numBlue = 0
-        self.numGreen = 0
-        self.numWhite = 0
-        self.numBrown = 0
-        self.numJoker = 0
-        self.redBonus = 0
-        self.blueBonus = 0
-        self.greenBonus = 0
-        self.whiteBonus = 0
-        self.brownBonus = 0
+        self.wallet = {
+            "red": 0,
+            "white": 0,
+            "blue": 0,
+            "green": 0,
+            "brown": 0,
+            "joker": 0
+        }
+        
+        self.bonus = {
+            "red": 0,
+            "white": 0,
+            "blue": 0,
+            "green": 0,
+            "brown": 0
+        }
 
         self.cardsReserved = []
         self.cardsPlayed = []
